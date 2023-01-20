@@ -5,7 +5,7 @@ from alive_progress import alive_bar
 import pandas as pd
 
 # file with the output
-csv_file = r'scrapped.csv'
+csv_file = r'data/scrapped.csv'
 
 # list of rooms collected
 rooms = []
@@ -151,7 +151,7 @@ for l in link_list:
       bar()
 # creating csv file
 df = pd.DataFrame(rooms)
-print('creating csv file...')
+print('Creating csv file...')
 df.to_csv (csv_file, index = None)
 
     
