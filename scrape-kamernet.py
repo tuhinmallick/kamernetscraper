@@ -1,8 +1,9 @@
 import time
-from bs4 import BeautifulSoup
+
+import pandas as pd
 import requests
 from alive_progress import alive_bar
-import pandas as pd
+from bs4 import BeautifulSoup
 
 # file with the output
 csv_file = r"scrapped.csv"
