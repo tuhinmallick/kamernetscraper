@@ -6,7 +6,7 @@ from alive_progress import alive_bar
 from bs4 import BeautifulSoup
 
 # file with the output
-csv_file = r"scrapped.csv"
+csv_file = r'data/scrapped.csv'
 
 # list of rooms collected
 rooms = []
@@ -169,8 +169,13 @@ for l in link_list:
             bar()
 # creating csv file
 df = pd.DataFrame(rooms)
+<<<<<<< HEAD:src/scrape-kamernet.py
+print('Creating csv file...')
+df.to_csv (csv_file, index = None)
+=======
 print("creating csv file...")
 df.to_csv(csv_file, index=None)
+>>>>>>> 269e5396a95758121013258f22a58d698ca442a9:scrape-kamernet.py
 
 # print('\n')
 print(len(rooms), f"rooms collected. saved in {csv_file}")
