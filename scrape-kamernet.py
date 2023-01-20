@@ -108,41 +108,48 @@ def parse_room(link):
     location = room_data.select_one(
         "body > main > div:nth-child(1) > div:nth-child(11) > div:nth-child(10) > div:nth-child(9) > div.col.s12.map-address"
     )
-    rooms.append(
-        {
-            "url": link,
-            "image_links": ",".join([img.get("data-src") for img in image_links])
-            if not image_links == None
-            else "",
-            "street_city_name": streetCityName.text.strip()
-            if not streetCityName == None
-            else "",
-            "surface_area": surfaceArea.text.strip() if not surfaceArea == None else "",
-            "unit": unit.text.strip() if not unit == None else "",
-            "delivery_level": deliveryLevel.text.strip().split(
-                "Opleverniveau: \r\n\t\t\t\t\t"
-            )[-1]
-            if not deliveryLevel == None
-            else "",
-            "availability": availability.text.strip()
-            if not availability == None
-            else "",
-            "price": price.text.strip() if not price == None else "",
-            "description": description.text.strip() if not description == None else "",
-            "living_room": livingRoom.text.strip() if not livingRoom == None else "",
-            "kitchen": kitchen.text.strip() if not kitchen == None else "",
-            "bathroom": bathroom.text.strip() if not bathroom == None else "",
-            "toilet": toilet.text.strip() if not toilet == None else "",
-            "internet": internet.text.strip() if not internet == None else "",
-            "energy_label": energy_label.text.strip()
-            if not energy_label == None
-            else "",
-            "housemates": housemates.text.strip() if not housemates == None else "",
-            "sex": sex.text.strip() if not sex == None else "",
-            "pets": pets.text.strip() if not pets == None else "",
-            "location": location.text.strip() if not location == None else "",
-        }
-    )
+    rooms.append({
+        "url":
+        link,
+        "image_links":
+        ",".join([img.get("data-src")
+                  for img in image_links]) if not image_links == None else "",
+        "street_city_name":
+        streetCityName.text.strip() if not streetCityName == None else "",
+        "surface_area":
+        surfaceArea.text.strip() if not surfaceArea == None else "",
+        "unit":
+        unit.text.strip() if not unit == None else "",
+        "delivery_level":
+        deliveryLevel.text.strip().split("Opleverniveau: \r\n\t\t\t\t\t")[-1]
+        if not deliveryLevel == None else "",
+        "availability":
+        availability.text.strip() if not availability == None else "",
+        "price":
+        price.text.strip() if not price == None else "",
+        "description":
+        description.text.strip() if not description == None else "",
+        "living_room":
+        livingRoom.text.strip() if not livingRoom == None else "",
+        "kitchen":
+        kitchen.text.strip() if not kitchen == None else "",
+        "bathroom":
+        bathroom.text.strip() if not bathroom == None else "",
+        "toilet":
+        toilet.text.strip() if not toilet == None else "",
+        "internet":
+        internet.text.strip() if not internet == None else "",
+        "energy_label":
+        energy_label.text.strip() if not energy_label == None else "",
+        "housemates":
+        housemates.text.strip() if not housemates == None else "",
+        "sex":
+        sex.text.strip() if not sex == None else "",
+        "pets":
+        pets.text.strip() if not pets == None else "",
+        "location":
+        location.text.strip() if not location == None else "",
+    })
 
     yield
 
@@ -151,7 +158,6 @@ def parse_room(link):
 print("getting room links..")
 link_list = get_room_links(link=base_url)
 print(f"{len(link_list)} links collected.")
-
 
 # collecting room data
 for l in link_list:
@@ -165,7 +171,6 @@ for l in link_list:
 df = pd.DataFrame(rooms)
 print("creating csv file...")
 df.to_csv(csv_file, index=None)
-
 
 # print('\n')
 print(len(rooms), f"rooms collected. saved in {csv_file}")
