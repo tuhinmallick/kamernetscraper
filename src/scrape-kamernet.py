@@ -36,7 +36,7 @@ def get_room_links(link):
 
         rooms_found = [i.get("href") for i in soup.select(rooms_selector)]
 
-        if len(rooms_found) == 0:
+        if not rooms_found:
             print(f"no room links found at {current_link}. moving on.")
             break
 
@@ -108,48 +108,51 @@ def parse_room(link):
     location = room_data.select_one(
         "body > main > div:nth-child(1) > div:nth-child(11) > div:nth-child(10) > div:nth-child(9) > div.col.s12.map-address"
     )
-    rooms.append({
-        "url":
-        link,
-        "image_links":
-        ",".join([img.get("data-src")
-                  for img in image_links]) if not image_links == None else "",
-        "street_city_name":
-        streetCityName.text.strip() if not streetCityName == None else "",
-        "surface_area":
-        surfaceArea.text.strip() if not surfaceArea == None else "",
-        "unit":
-        unit.text.strip() if not unit == None else "",
-        "delivery_level":
-        deliveryLevel.text.strip().split("Opleverniveau: \r\n\t\t\t\t\t")[-1]
-        if not deliveryLevel == None else "",
-        "availability":
-        availability.text.strip() if not availability == None else "",
-        "price":
-        price.text.strip() if not price == None else "",
-        "description":
-        description.text.strip() if not description == None else "",
-        "living_room":
-        livingRoom.text.strip() if not livingRoom == None else "",
-        "kitchen":
-        kitchen.text.strip() if not kitchen == None else "",
-        "bathroom":
-        bathroom.text.strip() if not bathroom == None else "",
-        "toilet":
-        toilet.text.strip() if not toilet == None else "",
-        "internet":
-        internet.text.strip() if not internet == None else "",
-        "energy_label":
-        energy_label.text.strip() if not energy_label == None else "",
-        "housemates":
-        housemates.text.strip() if not housemates == None else "",
-        "sex":
-        sex.text.strip() if not sex == None else "",
-        "pets":
-        pets.text.strip() if not pets == None else "",
-        "location":
-        location.text.strip() if not location == None else "",
-    })
+    rooms.append(
+        {
+            "url": link,
+            "image_links": ",".join(
+                [img.get("data-src") for img in image_links]
+            )
+            if image_links is not None
+            else "",
+            "street_city_name": streetCityName.text.strip()
+            if streetCityName is not None
+            else "",
+            "surface_area": surfaceArea.text.strip()
+            if surfaceArea is not None
+            else "",
+            "unit": unit.text.strip() if unit is not None else "",
+            "delivery_level": deliveryLevel.text.strip().split(
+                "Opleverniveau: \r\n\t\t\t\t\t"
+            )[-1]
+            if deliveryLevel is not None
+            else "",
+            "availability": availability.text.strip()
+            if availability is not None
+            else "",
+            "price": price.text.strip() if price is not None else "",
+            "description": description.text.strip()
+            if description is not None
+            else "",
+            "living_room": livingRoom.text.strip()
+            if livingRoom is not None
+            else "",
+            "kitchen": kitchen.text.strip() if kitchen is not None else "",
+            "bathroom": bathroom.text.strip() if bathroom is not None else "",
+            "toilet": toilet.text.strip() if toilet is not None else "",
+            "internet": internet.text.strip() if internet is not None else "",
+            "energy_label": energy_label.text.strip()
+            if energy_label is not None
+            else "",
+            "housemates": housemates.text.strip()
+            if housemates is not None
+            else "",
+            "sex": sex.text.strip() if sex is not None else "",
+            "pets": pets.text.strip() if pets is not None else "",
+            "location": location.text.strip() if location is not None else "",
+        }
+    )
 
     yield
 
